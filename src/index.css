@@ -1,1 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply w-full relative overflow-x-hidden font-inter;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  button {
+    @apply cursor-pointer transition-all duration-200;
+  }
+}
+
+a.active {
+  color: rgb(0, 147, 205);
+  font-weight: 400;
+}
