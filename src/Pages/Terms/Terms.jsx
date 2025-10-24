@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
 const Terms = () => {
   return (
-    <div>Terms</div>
-  )
-}
+    <div>
+      <title>Terms of use - GAI</title>
+      Terms
+    </div>
+  );
+};
 
-export default Terms
+export default Terms;

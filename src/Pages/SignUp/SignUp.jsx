@@ -1,4 +1,4 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router";
 import googleLogo from "./../../assets/google.webp";
 import {
@@ -7,6 +7,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
+import { CircleCheck, CircleX } from "lucide-react";
 
 /**
  *
@@ -19,6 +20,8 @@ const SignUp = () => {
    * states
    */
   // const [user, setUser] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   /**
    * sign in with google
@@ -42,13 +45,19 @@ const SignUp = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    // reset status: succes or error
+    setError("");
+    setSuccess(false);
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         const newUser = result.user;
         console.log(newUser);
+        setSuccess(true);
+        e.target.reset();
       })
       .catch((err) => {
-        console.log(err);
+        setError(err.message);
       });
   };
 
@@ -95,6 +104,30 @@ const SignUp = () => {
           </div>
 
           <form className="my-10" onSubmit={handleSubmit}>
+            {/* if acoount created successfully */}
+            {success && (
+              <div className="">
+                <p className="text-green-600 text-base bg-green-100 p-4 rounded-md mb-4 flex items-center justify-center gap-2">
+                  <span>
+                    <CircleCheck className="size-5" />
+                  </span>
+                  <p>Your account created successfully</p>
+                </p>
+              </div>
+            )}
+
+            {/* if user alrady exist */}
+            {error && (
+              <div className="">
+                <p className="text-red-400 text-base bg-red-100 p-4 rounded-md mb-4 flex items-center justify-center gap-2">
+                  <span>
+                    <CircleX className="size-5" />
+                  </span>
+                  <p>{error}</p>
+                </p>
+              </div>
+            )}
+
             <fieldset className="space-y-4">
               <div className="space-y-4">
                 <div className="flex flex-col items-start space-y-2">
@@ -110,6 +143,7 @@ const SignUp = () => {
                     name="email"
                     id="email"
                     required
+                    placeholder="Enter your email address"
                   />
                 </div>
 
@@ -126,6 +160,7 @@ const SignUp = () => {
                     name="password"
                     id="password"
                     required
+                    placeholder="Enter your password"
                   />
                 </div>
               </div>
@@ -143,11 +178,15 @@ const SignUp = () => {
               <p className="text-sm text-zinc-500 leading-loose">
                 By clicking the “Continue” button, you are creating a GAI
                 account and therefore you agree to GAI{" "}
-                <NavLink className="font-semibold" to="/terms">
+                <NavLink className="font-semibold" to="/terms" target="_blank">
                   Terms of Use
                 </NavLink>{" "}
                 and{" "}
-                <NavLink className="font-semibold" to="/privacy-policy">
+                <NavLink
+                  className="font-semibold"
+                  to="/privacy-policy"
+                  target="_blank"
+                >
                   Privacy Policy
                 </NavLink>
                 .
