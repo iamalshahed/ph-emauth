@@ -1,8 +1,57 @@
-import React from "react";
+// import React, { useState } from "react";
 import { NavLink } from "react-router";
 import googleLogo from "./../../assets/google.webp";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "../../firebase/firebase.init";
+
+/**
+ *
+ * providers
+ */
+const googleProvider = new GoogleAuthProvider();
 
 const SignUp = () => {
+  /**
+   * states
+   */
+  // const [user, setUser] = useState(null);
+
+  /**
+   * sign in with google
+   */
+  const handleSignInWithGoogle = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const newUser = result.user;
+        console.log(newUser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  /**
+   * handleSubmit
+   */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const newUser = result.user;
+        console.log(newUser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <title>Sign Up</title>
@@ -30,7 +79,10 @@ const SignUp = () => {
           </div>
 
           <div className="">
-            <button className="flex items-center justify-center gap-2 w-full border border-gray-300 rounded-full px-5 py-4 text-base text-zinc-600 hover:bg-gray-200">
+            <button
+              onClick={handleSignInWithGoogle}
+              className="flex items-center justify-center gap-2 w-full border border-gray-300 rounded-full px-5 py-4 text-base text-zinc-600 hover:bg-gray-200"
+            >
               <img width={22} src={googleLogo} alt="Google Logo" />
               <span>Continue with Google</span>
             </button>
@@ -42,7 +94,7 @@ const SignUp = () => {
             <hr className="border-gray-500" />
           </div>
 
-          <form className="my-10">
+          <form className="my-10" onSubmit={handleSubmit}>
             <fieldset className="space-y-4">
               <div className="space-y-4">
                 <div className="flex flex-col items-start space-y-2">
