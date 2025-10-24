@@ -4,9 +4,12 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Root from "./layout/Root.jsx";
+import Home from "./Pages/Home/Home.jsx";
 import Login from "./Pages/Login/Login.jsx";
 import SignUp from "./Pages/SignUp/SignUp.jsx";
 import About from "./Pages/About/About.jsx";
+import Terms from "./Pages/Terms/Terms.jsx";
+import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy.jsx";
 
 const router = createBrowserRouter([
   {
@@ -15,21 +18,29 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Login />,
+        element: <Home />,
       },
       {
         path: "/about-us",
         element: <About />,
       },
       {
-        path: "/login",
-        element: <Login />,
+        path: "/terms",
+        element: <Terms />,
       },
       {
-        path: "/signup",
-        element: <SignUp />,
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
 ]);
 

@@ -7,6 +7,10 @@
 }
 
 @layer base {
+  ::selection {
+    @apply bg-sky-200 text-sky-700;
+  }
+
   body {
     @apply w-full relative overflow-x-hidden font-inter;
   }
@@ -17,6 +21,14 @@
 
   button {
     @apply cursor-pointer transition-all duration-200;
+  }
+
+  input {
+    @apply w-full outline-none;
+  }
+
+  img {
+    @apply select-none pointer-events-none;
   }
 }
 

@@ -33,8 +33,8 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <nav className="w-full max-w-[1440px] mx-auto px-4 py-8 flex items-center justify-between gap-8">
+    <header className="border-b border-b-zinc-300 mb-10">
+      <nav className="w-full max-w-[1440px] mx-auto px-4 py-4 flex items-center justify-between gap-8">
         {/* logo */}
         <div className="">
           <NavLink to="/">
