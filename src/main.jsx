@@ -10,6 +10,7 @@ import SignUp from "./Pages/SignUp/SignUp.jsx";
 import About from "./Pages/About/About.jsx";
 import Terms from "./Pages/Terms/Terms.jsx";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy.jsx";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -47,5 +48,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
+    <Toaster position="top-center" />
   </StrictMode>
 );

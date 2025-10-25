@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import { CircleCheck, CircleX } from "lucide-react";
+import toast from "react-hot-toast";
 
 /**
  *
@@ -44,6 +45,36 @@ const SignUp = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+
+    // password pattern
+    /*
+      const lengthPattern = /^.{6,}$/;
+      const casePattern = /^(?=.*[a-z]) (?=.* [A-Z]).+$/;
+      const specialCharPattern = /^(?=.*[@#$%^&*(),.?":{}[<>]).+$/;
+
+      if (!lengthPattern.test(password)) {
+        toast.error("Password not matched!");
+        setError("Password must be 6 character or longer");
+        return;
+      } else if (!casePattern.test(password)) {
+        setError("Password must have at least one uppercase and one lowercase");
+        return;
+      } else if (!specialCharPattern.test(password)) {
+        setError(
+          "Password must contain atleast one special character (e. g. ! @ # $ % ^ & *)."
+        );
+        return;
+      }
+    */
+
+    const passwordPattern =
+      /^(?!^(.)\1{7,98}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^\r\n]{8,99}$/;
+    if (!passwordPattern.test(password)) {
+      setError(
+        "Password must be 8–99 characters long, include at least one uppercase letter, one lowercase letter, and one number, and cannot be made of a single repeating character."
+      );
+      return;
+    }
 
     // reset status: succes or error
     setError("");
