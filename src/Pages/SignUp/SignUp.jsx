@@ -8,7 +8,6 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import { CircleCheck, CircleX } from "lucide-react";
-import toast from "react-hot-toast";
 
 /**
  *
